@@ -1,0 +1,349 @@
+AWS Reyaz Sir Notes
+--------------------
+Application Server: The Server which has application hosted is called as Application Server.
+
+Web Server: The Server which takes the request from the clients and redirect to the app server
+
+Database Server: The Server which has database installed and which stores the data.
+
+Devices communicate with each other in the network with the IP and hostname.
+
+IP: Internet Protocol, is an unique identifier for a device in the network.
+
+Hostname: Name of the Server.
+
+* 3 Tier architecture is good for Production.
+
+Request flow:
+
+Browser -> Local DNS -> Rootname Server (identify .com, .org etc)-> Top level domain -> Name Server -> SOA (has the IP)
+
+DNS:- Domain name Server, which keeps track of all hostnames and IP addresses. DNS will convert IP to host and Host to IP.
+
+Firewall:- It stops unauthorized access to the network. ALLOW/DENY
+
+Load balancer:- Load Balancer is which distribute the traffic across multiple servers.
+
+Ports :=  HTTP = 80
+	  HTTPS = 443
+	  SSH = 22
+      RDP = 3389
+
+
+OSI layers are Application Layer(http/https) , Presentation Layer(SSH)
+Session Layer, Transport Layer(TCP), Network Layer, Data Link Layer and Physical Layer.
+
+Browser -> Firewall -> Load balancer -> Webserver -> App Server ->DB server
+
+HTTP: Hyper Text Transfer Protocol. 
+
+=================================================================
+* AWS has Global Infrastructure.
+* AWS is providing Infrastructure as a service.
+* Cloud is present in remote location (data center)
+* AWS is a cloud provider who provides infrastructure as a service.
+* Instead of doing computing on local machine/on-prem, you will do now computing on remote location(cloud) and that is called as Cloud Computing.
+* DEPLOYMENT MODELS
+	# Public Cloud: Services can be accessed by everyone
+	# Private Cloud: Services can be accessed within the org
+	# Hybrid Cloud: Combination of Public and Private
+
+* SERVICE MODELS
+	# IAAS: Infrastructure as a Service
+		Application, Data , OS - Customer Responsibility
+		Virtualization, Network, DC - Provider Responsibility
+
+	# PAAS: Software as a Service
+		Application, Data- Customer Responsibility
+		Virtualization, Network, DC - Provider Responsibility
+
+	# SAAS: Platform as a Service
+		Everything is taken care by Provider. (Gmail, zoom etc)
+====================================================================
+Elasticity: Increasing and Decreasing the no of servers to meet the work loads.
+	-> It is short term
+	-> It can be achieved in AWS using Auto-Scaling
+	-> Scale Out and Scale In
+	-> It is also called as Horizontal Scaling
+
+Scalability: Increasing and Decreasing the capacity of a Server.
+	-> It is long term
+	-> It can be achieved in AWS by changing the Instance Type
+	-> Scale Up and Scale Down
+	-> It is also called as Vertical Scaling
+
+=================================================================
+* A Customer is not interested to access his application using IP, instead use LB DNS name.
+* High Availability is a period of time which the service is available to the customer.
+* Load Balancer does two things, one is distributing the traffic and the other is performing health checks of servers.
+
+* High Availability can be achieved by Redundancy, Monitoring and Failover.
+
+Fault Tolerance = 0 downtime
+Fail over = little bit downtime
+
+=================Regions and Availability Zones===================
+
+* Region: It is a geo-graphical area. Ex:-Mumbai
+* Availability Zone: Simply a datacenter(AZ).
+* Regions and AZ's are managed by AWS.
+* A region has multiple Datacenters.
+* A region has multiple AZ's.
+* Servers/ Instances are placed in AZ's.
+* Best Practice is to distribute servers across multiple AZ's.
+* AZ's can communicate with each other as their networks are inter-connected.
+* Mumbai= ap-south-1
+   AZ = ap-south-1a
+	ap-south-1b
+	ap-south-1c
+* Regions don't communicate with each other by default, if required yes.
+* LB can distribute the traffic to multiple instances across multiple AZ's.
+* One Region can have multiple VPC's.
+================================EC2================================
+* EC2 = Elastic Compute Cloud
+* Server = Instance/ EC2 Instance(VM)
+* In EC2 Service, we can launch EC2 instances.
+* AWS services can be global or regional.
+* EC2 is Regional.
+* Load Balancer = Distributes the traffic to servers.
+* ELB is completely managed by AWS( HA, AS, Scalability, Performance)
+* ELB is not a server for us, it is a service for us.
+* ELB does not have AZ's. It is created at regional level.
+
+* ELASTIC BEAN STALK is a service which is used for easy and quick deployment of applications in AWS.
+In General, in PAAS -> You don't have any control on the servers.
+In AWS BEAN STALK, you have full control on the EC2 instances which are launched by beanstalk.
+
+Bean Stalk handles EC2 Instances(OS) behalf of us.
+* LIGHT SAIL = If you want to setup and create virtual private server which have everything installed.(WordPress, GitLab, node.js, Joomla etc) -> No autoscaling.
+
+* LAMBDA = It is serverless and used for automation. It is invoked based on the triggers.
+Example. If you want to start instances at particular time and want to stop instances at particular time.
+* We create functions using some scripting language.
+
+* EC2 states:
+	Launch
+	Start
+	Stop
+	Reboot
+	Terminate ->Kill/destroy
+
+* Status Checks: 
+	1) System Status Check: Checks the underlying hardware and network.
+	2) Instance Status Checks: Checks the Software and OS of the Instance.
+	3) EBS Status Checks: Check the EBS volume of the instance. (some regions).
+	   Example: In Region of North Virginia.
+======================== S3 ==============================================
+* In AWS, some services will start with Simple and ends with Service.
+Ex: SNS, SQS, SES, S3(Simple Storage Service)
+
+* S3 is an OBJECT based storage.
+*  Windows - S3
+   Folder - Bucket
+   File  - Object
+   boom.mp3 - Key
+* S3 is Serverless and AWS handles its HA, Performance and Scalability.
+* Bucket is a container for objects.
+* Object is a file
+* Key is the name of the file/name of the object.
+* S3 Supports STATIC WEBSITE HOSTING.
+* Create a bucket, upload your site files, enable static website hosting)(HA, Performance etc is handled by AWS).
+* You cannot attach S3 to the EC2 instance, but you can access S3 from the EC2 instance.
+========================EBS=====================================
+* EBS stands for Elastic Block Storage
+* EBS is Block based Storage.
+* Hard Disk = Volume = EBS volume
+* Volumes can be attached and detached.
+* You can attach multiple volumes to the EC2 instance.
+* EC2 instance has a default volume and that is ROOT volume
+
+* EC2 supports only Server side OS not client Side OS
+* The Root Volume always has OS(Win, Linux, mac)
+* If you have OS on the volume, that volume is called root volume.
+* EC2 instance can only have one root volume.
+* It can have multiple additional volumes.
+
+* Max Size of EBS volume is 16TB.
+* You cannot attach a volume to multiple EC2 instances at the same time.
+* Volume size can be only increased on FLY.(no need to stop the EC2)
+* Volume size cannot be decreased.
+* 
+* Root volume is always mounted/attached as /dev/sda1 or rarely
+/dev/xvda
+* Additional volume is always mounted as /dev/sdb,c,d
+		    or mounted as /dev/xvdf or xvdg etc
+
+* It is not possible to detach the root volume while EC2 is running.
+* It is possible to detach the additional volume while EC2 is running.
+(Not recommended).
+
+* It is always recommended to stop the EC2 instance while attaching or detaching the volumes to an Instance.
+* EC2 has AZ and Volume also have AZ.
+* EC2 instances and their volumes should be in same AZ.
+  Ex:- we cannot attach 1a volume to 1b EC2 instance
+       we can attach 1a volume to only 1a EC2 instance
+
+========================EFS==========================================
+* EFS stands for Elastic File System.
+* EFS is only for Linux EC2 Instances.
+* FSx is for Windows Instances.
+* EBS volumes cannot be shared across EC2 instances at same time.
+* EFS is file based storage.
+* EFS is completely managed by AWS.
+* EFS is unlimited storage.
+* EFS works with NFSv4 Protocol.
+
+* EFS doesn't not require any pre-provisioning(It will automatically
+increase and shrink based on the data that you put on EFS)
+* EFS can be mounted to multiple EC2 instances at the same time across multiple AZ's.
+* Glacier is used for archiving purpose which is cheaper than S3.
+
+* SNOW FAMILY:
+	SNOW CONE -> 8TB
+	SNOW EDGE -> 100 TB        ->S3
+	SNOW MOBILE -> PB(truck)
+  Snow Family is used to transfer huge data from on-prem to AWS and vice-versa.
+* It is a physical data transfer.
+
+====================================================================
+* RDS is a Relational Database Service which supports only RDBMS databases.
+* RDS is a database service but not a database.
+* RDS provides 6 database engines
+    MySQL - Open Source
+    Oracle - Oracle
+    MSSQL - Microsoft
+    PostgreSQL - Opensource            (MOMPMA)
+    MariaDB - Community
+    Aurora - AWS 
+* NoSQL Database service- DynamoDB(developers)
+* Database is used to store data.
+* Datawarehouse = which is used to store huge data
+	Redshift = Datawarehouse on AWS
+=================================================================
+* Elastic Cache is an in-memory database caching service
+* Low latency
+* High performance
+* Elastic Cache supports two types of engines
+	a)Redis - Persistent
+	b)Memcached - Non Persistent
+
+* Route53 is a DNS service in AWS which is used for mapping domain with ELB DNS name.
+* Direct Connect is used to connect on premises to AWS through leased fixed line.
+* VPC is Virtual private cloud, which is virtual datacenter on cloud
+* VPC is regional and AWS provided a default VPC.
+
+* CloudFront has Edge Locations and EL are connected with CDN.
+* Edge Location = Website caching
+* TTL = Time to Live
+* It will be cached based on TTL.
+* It is managed by AWS. We just need to setup/configure
+
+===============================================================
+* IAM is used for Authentication and Authorization of Users.
+* You can control the entire AWS account using IAM by giving proper 
+  permissions to the IAM user.
+* Users/Accounts can be classified into two types
+	a) Root - Login with email/pwd
+	b) IAM user - login with username/pwd
+* The person who provided card details is the root user and the users 
+  who are using that account are called IAM Users.
+
+* Organizations is a service which can combine/maintain multiple root accounts.
+
+* Cloud Watch is used to monitor AWS resources(EC2,ELB,S3,RDS,ASG etc)
+* Cloud watch Monitor Performance
+    a) Basic Monitoring : you get datapoints every 5min(free)
+    b) Detailed Monitoring : You get data points every 1min (charged)
+
+* Cloud Trail is used to monitor entire AWS account - > record, monitors, audit, track logs
+* Config: Monitors changes in AWS resources.
+* AWS Support:
+	a)Basic Support
+	b)Dev Support
+	c)Enterprise Support
+	d)Business Support
+
+===============================IAM================================== 17th session 24th Image
+* It is used for Security Purpose.
+* IAM is global and is Free
+* Root user has full permission and IAM user has limited permissions
+* Do not share your email/pwd to others.
+* You can share root account by creating IAM user.
+* It is not at all recommended to user root account for daily activities or work. Instead use IAM user.
+* MFA -> Multi factor Authentication is highly recommended for root and IAM users.
+* We can access AWS in two ways
+	A) Console Access (GUI using browser)
+	B) Programmatic Access(CLI,SDK, Dev tools)
+* In Console access, we provide email/pwd or username/pwd
+* In Programmatic access, we provide keys Access key and Secret key.
+* For IAM user, we can attach or detach Policies anytime.
+* Policies are nothing but permissions.
+* Keys are specific to users.
+* It is not recommended to share keys with anyone.
+* Create the Keys based on requirement but not all the time.
+* Keys will also have the same permissions like console
+* Every IAM user can have max 2 set of keys.
+* Once keys are lost it is lost. You cannot get the same keys back but you can regenerate N number of times.
+* If you regenerate, you will get the new keys but you cannot get the old keys back!
+* Do not create keys for the root account.
+
+* AWS Inspector enables you to analyze the behaviour of your AWS resources and helps you to identify potential security issues.
+
+* AWS Trusted Advisor advices about reducing costs, increasing performance and Improve security.
+* AMI's and Snapshots doesn't have any AZ, but volumes do have AZ.
+* You can configure Multiple ACCESS KEYS in aws CLI using --profile option
+aws configure --profile user1
+aws configure --profile user2
+
+You can view the current profile using
+aws sts get-caller-identity
+
+
+You can switch between the profiles using
+aws sts get-caller-identity <profileName> 
+
+========================================================
+Volumes:
+* Copy of point in time of volumes is called snapshot.
+* To delete a volume, first we need to detach the volume.
+* We cannot detach root volume while EC2 is running.
+* You can increase the size of volume on fly but you cannot decrease it.
+
+Increasing the Size of Root Volume on Windows:-
+1) Go to Volumes section, select the volume and click
+on modify volume.
+2) Follow the steps, increase it to the new size.
+3) Login to to windows instance.
+4) Click on Disk Management(Right click on Start)
+5) Right click on C drive and Extend Volume.
+6) Follow the onscreen instructions click next and Finish.
+7) Now C drive is allocated with new size.
+
+* You cannot create a root volume yourself.
+* Whatever volume you created is an additional volume.
+* While creating a new volume, make sure you choose the right AZ to which this volume has to be attached to the EC2 machine. The AZ of EC2 machine and AZ of volume has to be same.
+* While attaching as root volume, make sure you use /dev/sda1
+* While attaching as additional volume, make sure you use xvdf.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+	
+
+
+
