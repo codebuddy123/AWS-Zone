@@ -96,10 +96,10 @@ Fail over = little bit downtime
    AZ = ap-south-1a
 	ap-south-1b
 	ap-south-1c
-* Regions don't communicate with each other by default, if required yes.
+* Regions don't communicate with each other by default, if required yes through peering or TG
 * LB can distribute the traffic to multiple instances across multiple AZ's.
 * One Region can have multiple VPC's.
-================================EC2================================
+================================EC2==========================================================
 * EC2 = Elastic Compute Cloud
 * Server = Instance/ EC2 Instance(VM)
 * In EC2 Service, we can launch EC2 instances.
@@ -149,7 +149,78 @@ Ex: SNS, SQS, SES, S3(Simple Storage Service)
 * S3 Supports STATIC WEBSITE HOSTING.
 * Create a bucket, upload your site files, enable static website hosting)(HA, Performance etc is handled by AWS).
 * You cannot attach S3 to the EC2 instance, but you can access S3 from the EC2 instance.
-========================EBS=====================================
+* Bucket and its Authorization can be achieved using 
+  Bucket Policy, Object ACL, and Block Public Access.
+
+* Object ACL: Access Control List is used to provide permissions to the objects in the bucket.
+* Bucket Policy: It is used to provide permissions to the bucket using JSON format.
+* Block Public Access: It is used to block the public access to the bucket and its objects.
+
+* Object ACL is not a recommended approach to provide permissions to the bucket and its objects. You 
+have to explicitly allow permissions to the objects in the bucket using Object ACL. If there are 
+multiple objects in the bucket, you have to provide permissions to each and every object in the bucket using Object ACL.
+It is a tedious task and time consuming.
+
+* By default, Block Public access is enabled for the bucket and its objects. To make the object public 
+you have to disable the Block Public Access for the bucket and its objects. If the permission is block
+at the bucket level or ACL level then it will not allow the object to be public.
+So it should have allow access both at the bucket level and ACL level to make the object public.
+
+* Bucket policy provides granular level of security and it is written in JSON format.
+
+* We can generate the bucket policy using the AWS policy generator.
+
+Create a Bucket policy where ashish user have read only access on sample-bucket.
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+	{
+	  "Effect": "Allow",
+	  "Principal": {
+		"AWS": "arn:aws:iam::123456789012:user/ashish"
+	  },
+	  "Action": "s3:GetObject",
+	  "Resource": "arn:aws:s3:::sample-bucket/*"
+	}
+  ]
+}
+```
+Now let us understand the components of this JSON policy:
+- `"Version": "2012-10-17"`: This specifies the version of the policy language being used. It is a standard format for AWS policies.
+- `"Statement"`: This is an array of individual statements that define the permissions granted by the policy.
+- `"Effect": "Allow"`: This indicates that the policy allows the specified actions. Default is "Deny" if not specified.
+- `"Principal"`: This specifies the user or entity to which the policy applies. In this case, it is the IAM user "ashish" with the ARN `arn:aws:iam::123456789012:user/ashish`.
+- `"Action": "s3:GetObject"`: This specifies the action that is allowed by the policy. In this case, it allows the user to perform the `GetObject` action, which means they can read objects from the specified S3 bucket.
+- `"Resource": "arn:aws:s3:::sample-bucket/*"`: This specifies the resource to which the policy applies. The `arn:aws:s3:::sample-bucket/*` indicates that the policy applies to all objects within the S3 bucket named "sample-bucket".
+
+Every Resource in AWS has an ARN (Amazon Resource Name) which is a unique identifier for that resource.
+Format of ARN is:
+
+arn:partition:service:region:account-id:resource
+
+Breakdown of ARN components:
+	1.	arn → Always the literal prefix "arn"
+	2.	partition → Partition of AWS where the resource is (e.g., aws, aws-us-gov, aws-cn)
+	3.	service → AWS service namespace (e.g., s3, ec2, iam)
+	4.	region → Region code (e.g., us-east-1, ap-south-1). Some services (like S3 or IAM) are global and don’t require this.
+	5.	account-id → AWS account ID (12-digit number). May be omitted for global services.
+	6.	resource → Resource type + identifier. Format varies by service:
+	    •	resource-type/resource-id
+	    •	resource-type:resource-id
+	    •	Just resource-id
+
+
+```
+arn:aws:<service>:<region>:<account-id>:<resource-type>/<resource-name>
+arn:aws:s3:::<bucket-name>/*  // For S3 bucket  As buckets have a unique identifier they dont have region or account-id
+arn:aws:iam::<account-id>:user/<username> // For IAM user
+arn:aws:iam:145335322123:user/ashish // For IAM user there is no region as its a global service.
+arn:aws:ec2:<region>:<account-id>:instance/<instance-id> // For EC2 instance
+arn:aws:ec2:us-east-1:123456789012:instance/i-1234567890abcdef0 // For EC2 instance
+```
+
+========================EBS=================================================================================
 * EBS stands for Elastic Block Storage
 * EBS is Block based Storage.
 * Hard Disk = Volume = EBS volume
@@ -324,6 +395,11 @@ on modify volume.
 * While creating a new volume, make sure you choose the right AZ to which this volume has to be attached to the EC2 machine. The AZ of EC2 machine and AZ of volume has to be same.
 * While attaching as root volume, make sure you use /dev/sda1
 * While attaching as additional volume, make sure you use xvdf.
+
+
+
+
+
 
 
 
