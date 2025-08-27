@@ -10,7 +10,6 @@ This repository contains comprehensive notes on AWS concepts, infrastructure, an
 - **Regions & Availability Zones**: AWS regions, AZs, best practices for server placement.
 - **EC2 (Elastic Compute Cloud)**: Instances, states, status checks, Elastic Beanstalk, Light Sail, Lambda.
 - **S3 (Simple Storage Service)**: Object storage, buckets, keys, policies, access control, static website hosting.
-- **ARN (Amazon Resource Name)**: Format and examples for various AWS resources.
 - **EBS (Elastic Block Storage)**: Volumes, root/additional volumes, attachment/detachment, best practices.
 - **EFS (Elastic File System)**: File-based storage, NFS protocol, sharing across instances.
 - **RDS (Relational Database Service)**: Supported engines, NoSQL (DynamoDB), data warehousing (Redshift).
@@ -25,8 +24,6 @@ This repository contains comprehensive notes on AWS concepts, infrastructure, an
 - Use the notes as a quick reference for AWS concepts and best practices.
 - Suitable for interview preparation, certification study, and practical AWS usage.
 
-## Example Policy
-The notes include example AWS policies, such as S3 bucket policies for user access control.
 
 ## Author
 Compiled by Ashish (as per lecture notes)
