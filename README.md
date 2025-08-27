@@ -1,5 +1,5 @@
 
-This repository contains comprehensive notes on AWS concepts, infrastructure, and services, compiled from lectures by Reyaz Sir. The notes are intended for beginners and intermediate learners who want to understand AWS fundamentals, architecture, and commonly used services.
+This repository contains comprehensive notes on AWS concepts, infrastructure, and services, compiled from lectures learnt from various faculty. The notes are intended for beginners and intermediate learners who want to understand AWS fundamentals, architecture, and commonly used services.
 
 ## Contents
 - **Application, Web, and Database Servers**: Definitions and roles in a network.
@@ -29,7 +29,7 @@ This repository contains comprehensive notes on AWS concepts, infrastructure, an
 The notes include example AWS policies, such as S3 bucket policies for user access control.
 
 ## Author
-Compiled Ashish (as per lecture notes)
+Compiled by Ashish (as per lecture notes)
 
 ---
 For any suggestions or corrections, feel free to open an issue or pull request.
