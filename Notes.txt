@@ -6,7 +6,7 @@ Database Server: The Server which has database installed and which stores the da
 
 Devices communicate with each other in the network with the IP and hostname.
 
-IP: Internet Protocol, is an unique identifier for a device in the network.
+IP: Internet Protocol is an unique identifier for a device in the network.
 
 Hostname: Name of the Server.
 
