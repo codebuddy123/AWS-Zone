@@ -26,7 +26,7 @@ This repository contains comprehensive notes on AWS concepts, infrastructure, an
 
 
 ## Author
-Compiled by Ashish (as per lecture notes)
+Compiled by Ashish.
 
 ---
 For any suggestions or corrections, feel free to open an issue or pull request.
