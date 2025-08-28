@@ -1,5 +1,3 @@
-AWS Reyaz Sir Notes
---------------------
 Application Server: The Server which has application hosted is called as Application Server.
 
 Web Server: The Server which takes the request from the clients and redirect to the app server
